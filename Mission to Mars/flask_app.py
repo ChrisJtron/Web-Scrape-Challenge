@@ -35,12 +35,16 @@ image_db=client.Mars
 def index():
     # Store the entire team collection in a list
     headlines= (db.headlines.find({}, {'headline': 1}))
-    headline=headlines[2]
-    newses=(news_db.news.find({}, {'paragraph': 1}))
-    news=newses[1]
-    featured_image=(image_db.featured_images.find_one())
+    headline=headlines[1]['headline']
 
-    # Return the template with the teams list passed in
+    newses=(news_db.news.find_one())
+    news=newses['paragraph']
+    
+    image=(image_db.featured_images.find_one({}, sort=[('_id', pymongo.DESCENDING)]))
+    featured_image=image['link']
+    print(featured_image)
+
+    # Return the template 
     return render_template('index.html', headline=headline, news=news, featured_image=featured_image)
 
 
