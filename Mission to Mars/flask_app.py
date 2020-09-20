@@ -149,9 +149,9 @@ def scrape():
     # Connect to a database. Will create one if not already available.
     db = client.Mars
     # Drops collection if available to remove duplicates
-    db.headlines.drop()
+    #db.headlines.drop()
     # Creates a collection in the database and inserts documents
-    db.headlines.insert_many(news_headlines)
+    db.headlines.insert_one(news_headlines[1])
 
     #create news database
     news_db= client.Mars
